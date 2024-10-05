@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* index.css or global.css */
+
+body {
+  @apply font-sans; /* This applies the Poppins font globally */
+
+  overflow: auto; /* Allow scrolling */
+}
+
+.scrollbar-hide {
+  overflow: auto; /* Allow scrolling */
+  scrollbar-width: none; /* Firefox */
+}

@@ -1,14 +1,28 @@
-import Home from "./pages/Home"
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import LandingPage from "./pages/LandingPage.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import Authentication from "./pages/Authentication.jsx"
 
 function App() {
-  
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/">
+        <Route path="" element={<LandingPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/authentication" element={<Authentication />} />
+      </Route>
+    )
+  )
 
   return (
     <>
-      <div className='flex flex-col w-full h-screen bg-black text-white justify-center items-center'>
-        <h1>Hello world</h1>
-        <Home/>
-      </div>
+      <RouterProvider router = { router } />
     </>
   )
 }
