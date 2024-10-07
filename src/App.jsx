@@ -6,7 +6,9 @@ import {
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import Authentication from "./pages/Authentication.jsx"
+import LoginPage from "./pages/LoginPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
+
 
 function App() {
 
@@ -15,7 +17,8 @@ function App() {
       <Route path="/">
         <Route path="" element={<LandingPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/authentication" element={<Authentication />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Route>
     )
   )

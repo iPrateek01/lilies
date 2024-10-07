@@ -8,7 +8,7 @@ function LoginForm() {
   return (
     <>
       <div className="flex flex-row w-full h-screen">
-        <div className="flex flex-1 hidden sm:block">
+        <div className=" flex-1 hidden sm:flex">
           <img
             src="./assets/2.png"
             alt=""
@@ -17,6 +17,16 @@ function LoginForm() {
         </div>
         <div className="flex flex-1 flex-col justify-center items-center bg-white gap-10 w-full">
           <h1 className="text-black text-4xl font-semibold">Welcome Back!</h1>
+          <button className="btn flex flex-row bg-transparent border-none text-white rounded p-0.5 md:justify-start md:bg-blue-500">
+          <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="" className="bg-white w-2.5/12 h-full object-contain"/>
+          <span className="text-base px-2 hidden md:block">
+          Continue with Google
+          </span>
+          <span className="text-black md:hidden">
+          Sign In
+          </span>
+          </button>
+          <h1 className="text-black">or</h1>
           <form
             action="submit"
             method="post"
@@ -32,7 +42,10 @@ function LoginForm() {
                 <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
                 <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
               </svg>
-              <input type="text" className="grow" placeholder="Email" />
+              <input type="email" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="grow" placeholder="Please enter your email here..." />
             </label>
 
             <label className="input rounded flex items-center gap-2 bg-white w-4/6 border-customYellow">
@@ -53,6 +66,7 @@ function LoginForm() {
                 type={showPassword ? "text" : "password"}
                 className="grow"
                 value={password}
+                placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button
@@ -66,7 +80,9 @@ function LoginForm() {
             <button className="btn bg-customGreen text-customYellow w-4/6 rounded">Login</button>
           </form>
           <div className="text-black flex flex-row w-full justify-evenly">
+            <a href="/signup">
             <button className="btn btn-ghost">Create an account</button>
+            </a>
             <button className="btn btn-ghost">Forgot Password</button>
           </div>
         </div>

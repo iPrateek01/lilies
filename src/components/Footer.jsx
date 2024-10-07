@@ -35,7 +35,7 @@ function Footer() {
       <footer className="footer bg-customFooterColor text-base-content border-base-300 border-t px-10 py-4">
         <aside className="grid-flow-col items-center">
           <p>
-          © 2024 Lilies, All rights reserved
+          © 2024 Lilies, All rights reserved | Made with 💻 in INDIA.
           </p>
         </aside>
         <nav className="md:place-self-center md:justify-self-end">

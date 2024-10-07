@@ -2,7 +2,7 @@
 
 function Header() {
   return (
-    <div>
+    <>
       <div className="navbar bg-customGreen te text-white">
         <div className="flex-1">
           <a className="btn btn-ghost text-3xl">
@@ -48,7 +48,7 @@ function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
