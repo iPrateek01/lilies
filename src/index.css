@@ -9,6 +9,8 @@ body {
   @apply font-sans; /* This applies the Poppins font globally */
 
   overflow: auto; /* Allow scrolling */
+
+  /* overflow-x: hidden; */
 }
 
 .scrollbar-hide {

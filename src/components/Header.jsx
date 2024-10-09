@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <>
@@ -10,17 +12,17 @@ function Header() {
         </div>
         <div className="flex-none gap-7 text-xl">
           <div className="form-control">
-            <a href="/login">Login</a>
+            <Link to="/login">Login</Link>
           </div>
           <div className="form-control">
-            <a href="/signup">
+            <Link to="/signup">
               <button
                 style={{ backgroundColor: "rgba(226, 184, 135, 1)" }}
                 className="btn text-black"
               >
                 Sign Up
               </button>
-            </a>
+            </Link>
           </div>
           <div className="dropdown dropdown-end">
             <div
@@ -40,10 +42,10 @@ function Header() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="justify-between">Profile</a>
+                <Link to="#" className="justify-between">Profile</Link>
               </li>
               <li>
-                <a>Logout</a>
+                <Link to='#'>Logout</Link>
               </li>
             </ul>
           </div>
