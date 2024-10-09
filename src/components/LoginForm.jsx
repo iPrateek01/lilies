@@ -47,10 +47,10 @@ function LoginForm() {
               id="email"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="grow" placeholder="Please enter your email..." />
+              className="grow min-w-0" placeholder="Please enter your email..." />
             </label>
 
-            <label className="input rounded flex items-center gap-2 bg-white w-4/6 border-customYellow">
+            <label className="input rounded flex items-center gap-2  bg-white w-4/6 border-customYellow">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -63,10 +63,9 @@ function LoginForm() {
                   clipRule="evenodd"
                 />
               </svg>
-              {/* <input type="password" className="grow" value="password" /> */}
               <input
                 type={showPassword ? "text" : "password"}
-                className="grow"
+                className="grow min-w-0"
                 id="password"
                 value={password}
                 placeholder="********"

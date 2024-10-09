@@ -46,7 +46,7 @@ function SignupForm() {
                   value={email}
                   id="email"
                   onChange={(e) => setEmail(e.target.value)}
-                  className="grow" placeholder="Please Enter your email..." />
+                  className="grow min-w-0" placeholder="Please Enter your email..." />
                 </label>
     
                 <label className="input rounded flex items-center gap-2 bg-white w-4/6 border-customYellow">
@@ -65,7 +65,7 @@ function SignupForm() {
                   {/* <input type="password" className="grow" value="password" /> */}
                   <input
                     type={showPassword ? "text" : "password"}
-                    className="grow"
+                    className="grow min-w-0"
                     id="password"
                     value={password}
                     placeholder="********"
