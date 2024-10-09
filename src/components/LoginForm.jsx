@@ -44,8 +44,10 @@ function LoginForm() {
               </svg>
               <input type="email" 
               value={email}
+              id="email"
+              name="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="grow" placeholder="Please enter your email here..." />
+              className="grow" placeholder="Please enter your email..." />
             </label>
 
             <label className="input rounded flex items-center gap-2 bg-white w-4/6 border-customYellow">
@@ -65,6 +67,7 @@ function LoginForm() {
               <input
                 type={showPassword ? "text" : "password"}
                 className="grow"
+                id="password"
                 value={password}
                 placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}
