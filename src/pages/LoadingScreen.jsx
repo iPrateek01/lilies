@@ -10,8 +10,8 @@ const LoadingScreen = () => {
           alt="Loading"
           className="animate-bounce h-32 w-32 mx-auto transform transition-transform duration-500 ease-in-out hover:scale-110"
         />
-        {/* Stylish Loading Text */}
-        <h2 className="text-2xl mt-6 font-semibold text-white animate-pulse">Loading...</h2>
+        
+        
       </div>
     </div>
   );
