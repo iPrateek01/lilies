@@ -1,9 +1,8 @@
-// AnimateRoutes.jsx
+
 
 import { useLocation, Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
-// AnimateRoutes.jsx
 const pageVariants = {
     initial: {
       opacity: 0,
@@ -32,7 +31,7 @@ const pageVariants = {
           variants={pageVariants}
           transition={{ type: "tween", duration: 0.5 }} // Smooth transition
         >
-          <Outlet /> {/* Renders the matched child route */}
+          <Outlet />
         </motion.div>
       </AnimatePresence>
     );

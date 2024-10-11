@@ -1,3 +1,4 @@
+import { useEffect,useState } from "react";
 import {
   Route,
   RouterProvider,
@@ -9,11 +10,19 @@ import Dashboard from "./pages/Dashboard.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import AnimateRoutes from "./components/AnimateRoutes.jsx";
+import LoadingScreen from "./pages/LoadingScreen.jsx";
 
 
 
 function App() {
   
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay for the loading screen
+    setTimeout(() => setIsLoading(false), 2000); // Loading delay of 2 seconds
+  }, []);
+
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -30,7 +39,11 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+     {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <RouterProvider router={router} />
+      )}
     </>
   );
 }

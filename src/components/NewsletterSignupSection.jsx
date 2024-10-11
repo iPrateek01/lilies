@@ -15,7 +15,7 @@ function NewsletterSignupSection() {
       <div className="flex flex-row flex-1 mx-20 ">
         <form action="submit" method="post" className="flex flex-row flex-wrap gap-2 justify-evenly">
           <label htmlFor="getNotified">
-            <input type="email" name="getNotified" id="getNotified" placeholder="JohnHopkins@univ.com" className="bg-white p-3 w-80 rounded"/>
+            <input type="email" name="getNotified" id="getNotified" placeholder="Email" className="bg-white p-3 w-80 rounded"/>
           </label>
           <button style={{backgroundColor: 'rgba(251, 221, 187, 1)'}} className="btn btn-wide text-black rounded">Submit</button>
         </form>
