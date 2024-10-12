@@ -28,7 +28,7 @@ function LoginForm() {
           </button>
           <h1 className="text-black">or</h1>
           <form
-            action="submit"
+            action="#"
             method="post"
             className="text-black flex flex-col gap-10 w-full items-center"
           >
@@ -47,7 +47,7 @@ function LoginForm() {
               id="email"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="grow min-w-0" placeholder="Please enter your email..." />
+              className="grow min-w-0" placeholder="Email" />
             </label>
 
             <label className="input rounded flex items-center gap-2  bg-white w-4/6 border-customYellow">

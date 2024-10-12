@@ -5,12 +5,12 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import LandingPage from "./pages/LandingPage.jsx";
+import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import SignupPage from "./pages/SignupPage.jsx";
+import LoginPage from "./pages/Authentication/LoginPage.jsx";
+import SignupPage from "./pages/Authentication/SignupPage.jsx";
 import AnimateRoutes from "./components/AnimateRoutes.jsx";
-import LoadingScreen from "./pages/LoadingScreen.jsx";
+import LoadingScreen from "./pages/LandingPage/LoadingScreen.jsx";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);

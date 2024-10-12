@@ -1,5 +1,5 @@
 
-import SignupForm from '../components/SignupForm'
+import SignupForm from '../../components/Authentication/SignupForm'
 
 function SignupPage() {
   return (

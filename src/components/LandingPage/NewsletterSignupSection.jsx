@@ -13,7 +13,7 @@ function NewsletterSignupSection() {
         </p>
       </div>
       <div className="flex flex-row flex-1 mx-20 ">
-        <form action="submit" method="post" className="flex flex-row flex-wrap gap-2 justify-evenly">
+        <form action="#" method="post" className="flex flex-row flex-wrap gap-2 justify-evenly">
           <label htmlFor="getNotified">
             <input type="email" name="getNotified" id="getNotified" placeholder="Email" className="bg-white p-3 w-80 rounded"/>
           </label>
