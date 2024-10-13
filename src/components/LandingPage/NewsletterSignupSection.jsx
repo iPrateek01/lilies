@@ -4,7 +4,7 @@ function NewsletterSignupSection() {
   return (
     <>
     <div className="flex flex-row flex-wrap items-center justify-center bg-customGreen py-20 gap-10">
-      <div className="flex flex-col flex-1 px-28 items-start gap-10 mx-20">
+      <div className="flex flex-col text-center flex-1 items-start gap-10 mx-20 sm:mx-0 sm:text-center md:mx-20 md:text-start">
         <h1 className="text-4xl font-bold" style={{color: 'rgba(251, 221, 187, 1)'}}>
         Get notified when we update!
         </h1>

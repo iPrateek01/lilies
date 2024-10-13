@@ -16,7 +16,7 @@ function HeroSection() {
         <button className="btn btn-wide text-black text-xl mx-3" style={{backgroundColor: 'rgba(226, 184, 135, 1)'}}>Order Now</button>
         </Link>
       </div>
-      <div className="hidden lg:flex lg:flex-row lg:justify-center lg:flex-1">
+      <div className="hidden lg:flex lg:flex-row lg:justify-end lg:flex-1">
         <img src="./assets/1.png" alt="" className="w-1/2 h-auto"/>
       </div>
     </div>
