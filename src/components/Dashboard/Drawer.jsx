@@ -32,7 +32,7 @@ function Drawer() {
               {currentPage()}
             </h1>
           </button>
-          <dialog id="my_modal_3" className="modal">
+          <dialog id="my_modal_3" className="modal bg-white text-white">
             <div className="modal-box">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
@@ -40,28 +40,28 @@ function Drawer() {
                   ✕
                 </button>
               </form>
-              <h3 className="font-bold text-lg py-2">Navigation</h3>
-              <p className="py-2">
+              <h3 className="font-bold text-lg py-4">Navigation</h3>
+              <p className="py-4">
                 <NavLink index>
                   Menu
                 </NavLink>
               </p>
-              <p className="py-2">
+              <p className="py-4">
                 <NavLink to="userprofile">
                   Your Account
                 </NavLink>
               </p>
-              <p className="py-2">
+              <p className="py-4">
                 <NavLink to="addresses">
                   Addresses
                 </NavLink>
               </p>
-              <p className="py-2">
+              <p className="py-4">
                 <NavLink to="cart">
                   Cart
                 </NavLink>
               </p>
-              <p className="py-2">
+              <p className="py-4">
                 <NavLink to="orders">
                   Orders
                 </NavLink>
