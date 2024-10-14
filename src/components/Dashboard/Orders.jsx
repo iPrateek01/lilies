@@ -1,6 +1,6 @@
 
 
-function UserProfile() {
+function Orders() {
   return (
     <>
     <div className="w-full h-screen bg-white">
@@ -10,4 +10,4 @@ function UserProfile() {
   )
 }
 
-export default UserProfile
+export default Orders

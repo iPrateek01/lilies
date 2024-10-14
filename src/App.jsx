@@ -11,6 +11,11 @@ import LoginPage from "./pages/Authentication/LoginPage.jsx";
 import SignupPage from "./pages/Authentication/SignupPage.jsx";
 import AnimateRoutes from "./components/AnimateRoutes.jsx";
 import LoadingScreen from "./pages/LandingPage/LoadingScreen.jsx";
+import UserProfile from "./components/Dashboard/UserProfile.jsx";
+import Addresses from "./components/Dashboard/Addresses.jsx";
+import Orders from "./components/Dashboard/Orders.jsx";
+import Cart from "./components/Dashboard/Cart.jsx";
+import DishMenu from "./components/Dashboard/DishMenu.jsx";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,9 +40,15 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<AnimateRoutes />}>
         <Route index element={<LandingPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route index element={<DishMenu />}/>
+          <Route path="cart" element={<Cart />} />
+          <Route path="orders" element={<Orders />}/>
+          <Route path="userprofile" element={<UserProfile />}/>
+          <Route path="addresses" element={<Addresses />}/>
+        </Route>
+        <Route path="login" element={<LoginPage />} />
+        <Route path="signup" element={<SignupPage />} />
       </Route>
     )
   );

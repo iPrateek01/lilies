@@ -1,8 +1,12 @@
-import React from 'react'
+
 
 function Addresses() {
   return (
-    <div>Addresses</div>
+    <>
+    <div className="w-full h-screen bg-white">
+
+    </div>
+    </>
   )
 }
 

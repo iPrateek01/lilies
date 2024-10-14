@@ -1,8 +1,8 @@
-import React from 'react'
+
 
 function DishDetails() {
   return (
-    <div>DishDetails</div>
+    <div className="hidden">DishDetails</div>
   )
 }
 
