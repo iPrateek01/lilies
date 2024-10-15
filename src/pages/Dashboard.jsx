@@ -5,7 +5,7 @@ import Drawer from "../components/Dashboard/Drawer";
 function Dashboard() {
   return (
     <>
-      <div className="flex flex-col lg:flex-row bg-white">
+      <div className="w-full h-screen flex flex-col lg:flex-row bg-white overflow-hidden">
         <Drawer />
         <Outlet />
         <DishDetails />

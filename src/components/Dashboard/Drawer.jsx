@@ -22,10 +22,14 @@ function Drawer() {
   return (
     <>
     <div>
-    <div className="flex flex-row justify-end p-10 lg:hidden">
+    <div className="w-full flex flex-row justify-between p-2 sm:p-10 lg:hidden">
+      <div className="text-black flex flex-row justify-center items-center gap-4">
+        <img src="/assets/lilies.svg" alt="" className="object-cover w-8/12 sm:w-3/12 h-auto"/>
+        <h1 className="text-3xl hidden sm:block">Lilies</h1>
+      </div>
           {/* You can open the modal using document.getElementById('ID').showModal() method */}
           <button
-            className="btn btn-ghost shadow-lg"
+            className="btn btn-ghost shadow-md"
             onClick={() => document.getElementById("my_modal_3").showModal()}
           >
             <h1 className="text-black">

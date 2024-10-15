@@ -1,0 +1,84 @@
+import { motion } from "framer-motion";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../../firebase/firebase";
+import { Suspense, lazy } from "react";
+
+const FoodItemCard = lazy(() => import("./FoodItemCard"));
+
+function FoodMenu() {
+  const [foodItems, setFoodItems] = useState([]);
+
+  useEffect(() => {
+    const fetchFoodItems = async () => {
+      try {
+        const foodItemsRef = collection(db, "foodItems");
+        const snapshot = await getDocs(foodItemsRef);
+        const items = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFoodItems(items);
+      } catch (error) {
+        console.error("Error fetching food items:", error);
+      }
+    };
+
+    fetchFoodItems();
+  }, []);
+
+  return (
+    <>
+      <div className="w-full h-screen bg-white flex flex-col place-items-center p-4 overflow-auto">
+        <div>
+          <motion.h1
+            className="text-3xl font-bold text-center mt-10 text-black"
+            initial={{ opacity: 0, filter: "blur(10px)" }} // Initial state (fully visible, no blur)
+            animate={{ opacity: 1, filter: "blur(0px)" }} // Animation state (fade out and blur)
+            transition={{ duration: 2 }} // Duration of animation
+          >
+            Welcome to My Page!
+          </motion.h1>
+        </div>
+        <div className="flex flex-row justify-center flex-wrap gap-5 sm:gap-10 lg:mx-10 my-14">
+          {foodItems.map((item) => (
+            <Suspense
+              fallback={
+                <div>
+                  <div className="flex w-52 flex-col gap-4">
+                    <div className="skeleton h-32 w-full"></div>
+                    <div className="skeleton h-4 w-28"></div>
+                    <div className="skeleton h-4 w-full"></div>
+                    <div className="skeleton h-4 w-full"></div>
+                  </div>
+                </div>
+              }
+              key={item.id}
+            >
+              <FoodItemCard item={item} />
+            </Suspense>
+          ))}
+        </div>
+        <div className="fixed z-10 bottom-0 p-2 flex justify-center">
+          <label className="input input-bordered flex items-center gap-2 min-w-96">
+            <input type="text" className="grow min-w-0" placeholder="Search" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </label>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default FoodMenu;

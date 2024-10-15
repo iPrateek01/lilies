@@ -17,7 +17,8 @@ function HeroSection() {
         </Link>
       </div>
       <div className="hidden lg:flex lg:flex-row lg:justify-end lg:flex-1">
-        <img src="./assets/1.png" alt="" className="w-1/2 h-auto"/>
+        <img src="./assets/1.png" 
+        alt="" className="w-1/2 h-auto"/>
       </div>
     </div>
     </>

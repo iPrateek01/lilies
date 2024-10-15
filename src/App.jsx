@@ -15,7 +15,7 @@ import UserProfile from "./components/Dashboard/UserProfile.jsx";
 import Addresses from "./components/Dashboard/Addresses.jsx";
 import Orders from "./components/Dashboard/Orders.jsx";
 import Cart from "./components/Dashboard/Cart.jsx";
-import DishMenu from "./components/Dashboard/DishMenu.jsx";
+import FoodMenu from "./components/Dashboard/FoodMenu.jsx";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +41,7 @@ function App() {
       <Route path="/" element={<AnimateRoutes />}>
         <Route index element={<LandingPage />} />
         <Route path="dashboard" element={<Dashboard />}>
-          <Route index element={<DishMenu />}/>
+          <Route index element={<FoodMenu />}/>
           <Route path="cart" element={<Cart />} />
           <Route path="orders" element={<Orders />}/>
           <Route path="userprofile" element={<UserProfile />}/>

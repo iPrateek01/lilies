@@ -14,19 +14,19 @@ function SpecialMealsSection() {
       </div>
       <div className="flex flex-row  items-center flex-wrap justify-evenly gap-10">
         <div className="flex flex-col items-center max-w-64 sm:mx-24 gap-5">
-          <img src="./assets/4.png" alt="" className="max-w-60"/>
+          <img src="./assets/4.png" alt="" className="max-w-60" loading="lazy"/>
           <h1 style={{color:'rgba(251, 221, 187, 1)'}} className="font-bold">
             Stir fry Pasta
           </h1>
           <p>Stir fry pasta yada yada yada because of Sesan </p>
         </div>
         <div className="flex flex-col items-center max-w-64 sm:mx-24 gap-5">
-          <img src="./assets/5.png" alt="" className="max-w-60"/>
+          <img src="./assets/5.png" alt="" className="max-w-60" loading="lazy"/>
           <h1 style={{color:'rgba(251, 221, 187, 1)'}} className="font-bold">Meat Balls</h1>
           <p>Stir fry pasta yada yada yada because of Sesan</p>
         </div>
         <div className="flex flex-col items-center max-w-64 sm:mx-24 gap-5">
-          <img src="./assets/6.png" alt="" className="max-w-60" />
+          <img src="./assets/6.png" alt="" className="max-w-60"  loading="lazy"/>
           <h1 style={{color:'rgba(251, 221, 187, 1)'}} className="font-bold">Burger Meal</h1>
           <p>Stir fry pasta yada yada yada because of Sesan</p>
         </div>
