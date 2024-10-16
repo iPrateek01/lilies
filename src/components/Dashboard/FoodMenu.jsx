@@ -55,12 +55,12 @@ function FoodMenu() {
               }
               key={item.id}
             >
-              <FoodItemCard item={item} />
+              <FoodItemCard key={item.id} item={item} />
             </Suspense>
           ))}
         </div>
         <div className="fixed z-10 bottom-0 p-2 flex justify-center">
-          <label className="input input-bordered flex items-center gap-2 min-w-96">
+          <label className="input input-bordered flex items-center gap-2 min-w-96 rounded-full">
             <input type="text" className="grow min-w-0" placeholder="Search" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
