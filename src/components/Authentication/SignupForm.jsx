@@ -1,10 +1,45 @@
 import { useState } from "react";
+import { auth, provider, db } from "../../firebase/firebase";
+import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate()
+
+    const signUpWithGoogle = async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        console.log("User details: ", user);
+      } catch (error) {
+        console.error("Error signing in with Google: ", error);
+      }
+    };
+
+
+    const signUp = async (email, password, name) => {
+      try {
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+
+        
+
+        console.log("User created:", result.user);
+        navigate("/dashboard")
+      } catch (error) {
+        console.error("Error signing up:", error);
+      }
+    };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      signUp()
+    }
+
   
     return (
         <>
@@ -18,7 +53,7 @@ function SignupForm() {
             </div>
             <div className="flex flex-1 flex-col justify-center items-center bg-white gap-10 w-full">
               <h1 className="text-black text-4xl font-semibold">Welcome! </h1>
-              <button className="btn flex flex-row bg-transparent border-none text-white rounded p-0.5 md:justify-start md:bg-blue-500">
+              <button className="btn flex flex-row bg-transparent border-none text-white rounded p-0.5 md:justify-start md:bg-blue-500 hover:bg-blue-500 md:hover:bg-gray-800" onClick={signUpWithGoogle}>
           <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="" className="bg-white w-2.5/12 h-full object-contain"/>
           <span className="text-base px-2 hidden md:block">
           Continue with Google
@@ -29,8 +64,7 @@ function SignupForm() {
           </button>
           <h1 className="text-black">or</h1>
               <form
-                action="#"
-                method="post"
+                onClick={handleSubmit}
                 className="text-black flex flex-col gap-10 w-full items-center"
               >
                 <label className="input rounded flex items-center gap-2 bg-white w-4/6 border-customYellow">
@@ -97,7 +131,7 @@ function SignupForm() {
                     {showPassword ? "Hide" : "Show"}
                   </button>
                 </label>
-                <button className="btn bg-customGreen text-customYellow w-4/6 rounded">Sign Up</button>
+                <button className="btn bg-customGreen text-customYellow w-4/6 rounded" >Sign Up</button>
               </form>
               <div className="text-black flex flex-row w-full justify-evenly">
                 <a href="/login">

@@ -1,9 +1,42 @@
 import { useState } from "react";
+import { provider, auth } from "../../firebase/firebase";
+import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate()
+
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log("User details: ", user);
+      navigate('/dashboard')
+    } catch (error) {
+      console.error("Error signing in with Google: ", error);
+    }
+  };
+
+
+  const login = async (email, password) => {
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      console.log("User logged in:", result.user);
+      navigate('/dashboard')
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    login()
+  }
+
 
   return (
     <>
@@ -17,7 +50,7 @@ function LoginForm() {
         </div>
         <div className="flex flex-1 flex-col justify-center items-center bg-white gap-10 w-full">
           <h1 className="text-black text-4xl font-semibold">Welcome Back!</h1>
-          <button className="btn flex flex-row bg-transparent border-none text-white rounded p-0.5 md:justify-start md:bg-blue-500">
+          <button className="btn flex flex-row bg-transparent border-none text-white rounded p-0.5 md:justify-start md:hover:bg-gray-800 md:bg-blue-500 hover:bg-blue-500 " onClick={signInWithGoogle}>
           <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="" className="bg-white w-2.5/12 h-full object-contain"/>
           <span className="text-base px-2 hidden md:block">
           Continue with Google
@@ -28,8 +61,7 @@ function LoginForm() {
           </button>
           <h1 className="text-black">or</h1>
           <form
-            action="#"
-            method="post"
+            onSubmit={handleSubmit}
             className="text-black flex flex-col gap-10 w-full items-center"
           >
             <label className="input rounded flex items-center gap-2 bg-white w-4/6 border-customYellow">

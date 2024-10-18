@@ -35,7 +35,7 @@ function FoodMenu() {
             className="text-3xl font-bold text-center mt-10 text-black"
             initial={{ opacity: 0, filter: "blur(10px)" }} // Initial state (fully visible, no blur)
             animate={{ opacity: 1, filter: "blur(0px)" }} // Animation state (fade out and blur)
-            transition={{ duration: 2 }} // Duration of animation
+            transition={{ duration: 1 }} // Duration of animation
           >
             Welcome to My Page!
           </motion.h1>
@@ -60,8 +60,8 @@ function FoodMenu() {
           ))}
         </div>
         <div className="fixed z-10 bottom-0 p-2 flex justify-center">
-          <label className="input input-bordered flex items-center gap-2 min-w-96 rounded-full">
-            <input type="text" className="grow min-w-0" placeholder="Search" />
+          <label className="input input-bordered flex items-center gap-2 min-w-96 rounded-full bg-rose-400 text-black">
+            <input type="text" className="grow min-w-0 placeholder-black" placeholder="Search" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
