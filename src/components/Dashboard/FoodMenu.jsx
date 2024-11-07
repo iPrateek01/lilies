@@ -60,7 +60,7 @@ function FoodMenu() {
           ))}
         </div>
         <div className="fixed z-10 bottom-0 p-2 flex justify-center">
-          <label className="input input-bordered flex items-center gap-2 min-w-96 rounded-full bg-rose-400 text-black">
+          <label className="input input-bordered flex items-center gap-2 min-w-96 rounded-full bg-gradient-to-r from-emerald-400 to-rose-400 text-black shadow-lg">
             <input type="text" className="grow min-w-0 placeholder-black" placeholder="Search" />
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -1,35 +1,41 @@
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase.js';  // Your Firebase config
 import foodData from '../../data/foodData.json' assert { type: 'json' };  // Your JSON file
 
-const uploadData = async () => {
+const updateData = async () => {
   try {
     const foodItemsRef = collection(db, 'foodItems');  // Firestore collection name
 
-    // Loop through each food item in the JSON file and upload/update it to Firestore
+    // Loop through each food item in the JSON file and update it in Firestore
     for (let item of foodData) {
-      // Create a unique document ID (you can use name, or id from your data, or generate one)
-      const itemDoc = doc(foodItemsRef, item.name);  // Use 'name' or another unique field as document ID
+      // Reference the document by unique identifier (e.g., item.name)
+      const itemDocRef = doc(foodItemsRef, item.name);
 
-      // Use setDoc to overwrite existing data or create new if it doesn't exist
-      await setDoc(itemDoc, {
-        name: item.name,
-        description: item.description,
-        price: item.price,
-        category: item.category,
-        image: item.image,
-        allergens: item.allergens,
-        review: item.review,
-        servingSize: item.servingSize,
-        tags: item.tags
-      });
-      console.log(`Uploaded/Updated: ${item.name}`);
+      // Check if the document exists
+      const docSnapshot = await getDoc(itemDocRef);
+      if (docSnapshot.exists()) {
+        // If it exists, update the document
+        await updateDoc(itemDocRef, {
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          category: item.category,
+          image: item.image,
+          allergens: item.allergens,
+          review: item.review,
+          servingSize: item.servingSize,
+          tags: item.tags
+        });
+        console.log(`Updated: ${item.name}`);
+      } else {
+        console.log(`Skipped: ${item.name} (Document does not exist)`);
+      }
     }
 
-    console.log('All data successfully uploaded or updated!');
+    console.log('Data update process complete!');
   } catch (error) {
-    console.error('Error uploading data:', error);
+    console.error('Error updating data:', error);
   }
 };
 
-uploadData();
+updateData();
