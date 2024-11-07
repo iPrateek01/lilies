@@ -1,7 +1,8 @@
-// import React from 'react'
+// import {memo} from 'react'
 import { CiShoppingCart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
 import PropTypes from "prop-types";
+
 
 const FoodItemCard = ({ item }) => {
   
