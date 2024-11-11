@@ -2,7 +2,7 @@ import { signOut, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../../firebase/firebase"; // Firebase initialization file
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AnimateRoutes from "../AnimateRoutes";
 
 function UserProfile() {
@@ -21,6 +21,8 @@ function UserProfile() {
         setPhotoURL(currentUser.photoURL || placeholderURL); // Update photo URL when the user changes
       }
     });
+
+    
 
     // Fetch the placeholder image from Firebase Storage
     const fetchPlaceholderImage = async () => {
@@ -94,11 +96,13 @@ function UserProfile() {
     return <div><AnimateRoutes /></div>; // Show loading state until user and placeholder URL are available
   }
 
+  
+
   return (
     <div className="w-full h-screen bg-white flex flex-col items-center justify-evenly">
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="avatar">
-          <div className="w-56 h-auto rounded-xl">
+          <div className="w-44 h-auto rounded-3xl">
             <img
               className="w-full h-full object-cover"
               src={photoURL || placeholderURL}
@@ -152,13 +156,19 @@ function UserProfile() {
         />
       </div>
 
-      <div>
+      <div className="flex flex-row justify-center items-center gap-5 p-2">
         <button
           onClick={handleSignOut}
           className="btn bg-red-700 border-red-700 text-white shadow-xl"
         >
           Sign Out
         </button>
+
+        { user?.email == import.meta.env.VITE_FIREBASE_ADMIN_EMAIL && (<NavLink to="/admin">
+          <button className="bg-stone-700 text-white rounded-xl p-3">
+            Admin Panel
+          </button>
+        </NavLink>)}
       </div>
     </div>
   );
