@@ -16,6 +16,8 @@ import Addresses from "./components/Dashboard/Addresses.jsx";
 import Orders from "./components/Dashboard/Orders.jsx";
 import Cart from "./components/Dashboard/Cart.jsx";
 import FoodMenu from "./components/Dashboard/FoodMenu.jsx";
+import ProtectedRoute from "./components/ProtectedRoutes.jsx";
+import Admin from "./pages/Admin/Admin.jsx";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,12 +42,15 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<AnimateRoutes />}>
         <Route index element={<LandingPage />} />
-        <Route path="dashboard" element={<Dashboard />}>
-          <Route index element={<FoodMenu />}/>
-          <Route path="cart" element={<Cart />} />
-          <Route path="orders" element={<Orders />}/>
-          <Route path="userprofile" element={<UserProfile />}/>
-          <Route path="addresses" element={<Addresses />}/>
+        <Route element={<ProtectedRoute />}>
+          <Route path="admin" element={<Admin />} />
+          <Route path="dashboard" element={<Dashboard />}>
+            <Route index element={<FoodMenu />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="userprofile" element={<UserProfile />} />
+            <Route path="addresses" element={<Addresses />} />
+          </Route>
         </Route>
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignupPage />} />
@@ -54,13 +59,7 @@ function App() {
   );
 
   return (
-    <>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <RouterProvider router={router} />
-      )}
-    </>
+    <>{isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}</>
   );
 }
 

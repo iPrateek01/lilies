@@ -14,7 +14,7 @@ import clsx from "clsx";
 import { Button } from "@headlessui/react";
 
 function Addresses() {
-  const [addressInput, setAddressInput] = useState(true);
+  const [addressInput, setAddressInput] = useState(false);
   const [streetAddressLine1, setstreetAddressLine1] = useState('')
   const [streetAddressLine2, setstreetAddressLine2] = useState('')
   const [city, setCity] = useState('')

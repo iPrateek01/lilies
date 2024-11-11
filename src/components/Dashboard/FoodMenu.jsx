@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase";
 import { Suspense, lazy } from "react";
 
@@ -27,21 +27,7 @@ function FoodMenu() {
     fetchFoodItems();
   }, []);
 
-  const renderFoodItemCard = useCallback((item) => (
-    <Suspense
-      fallback={
-        <div className="flex w-52 flex-col gap-4">
-          <div className="skeleton h-32 w-full"></div>
-          <div className="skeleton h-4 w-28"></div>
-          <div className="skeleton h-4 w-full"></div>
-          <div className="skeleton h-4 w-full"></div>
-        </div>
-      }
-      key={item.id}
-    >
-      <FoodItemCard item={item} />
-    </Suspense>
-  ), []);
+  // const renderFoodItemCard = useCallback(, []);
   
 
   return (
@@ -58,7 +44,21 @@ function FoodMenu() {
           </motion.h1>
         </div>
         <div className="flex flex-row justify-center flex-wrap gap-5 sm:gap-10 lg:mx-10 my-14">
-        {foodItems.map(renderFoodItemCard)}
+        {foodItems.map((item) => (
+    <Suspense
+      fallback={
+        <div className="flex w-52 flex-col gap-4">
+          <div className="skeleton h-32 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+      }
+      key={item.id}
+    >
+      <FoodItemCard key={item.id} item={item} />
+    </Suspense>
+  ))}
         </div>
         <div className="fixed z-10 bottom-0 p-2 flex justify-center">
           <label className="input input-bordered flex items-center gap-2 min-w-96 rounded-full bg-gradient-to-r from-emerald-400 to-rose-400 text-black shadow-lg">
