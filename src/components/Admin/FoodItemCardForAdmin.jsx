@@ -47,7 +47,7 @@ FoodItemCard.propTypes = {
     servingSize: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
-  onDelete: PropTypes.func.isRequired, // Ensure a delete function is passed as a prop
+  deleteFoodItem: PropTypes.func.isRequired, // Ensure a delete function is passed as a prop
 };
 
 export default FoodItemCard;

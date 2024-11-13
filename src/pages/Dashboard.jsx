@@ -1,14 +1,12 @@
 import { Outlet } from "react-router-dom";
-import DishDetails from "../components/Dashboard/DishDetails";
-import Drawer from "../components/Dashboard/Drawer";
+import NavForDashboard from "../components/Dashboard/NavForDashboard";
 
 function Dashboard() {
   return (
     <>
       <div className="w-full h-screen flex flex-col lg:flex-row bg-white overflow-hidden">
-        <Drawer />
+        <NavForDashboard />
         <Outlet />
-        <DishDetails />
       </div>
     </>
   );

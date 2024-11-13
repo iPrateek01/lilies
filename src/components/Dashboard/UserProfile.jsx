@@ -99,7 +99,7 @@ function UserProfile() {
   
 
   return (
-    <div className="w-full h-screen bg-white flex flex-col items-center justify-evenly">
+    <div className="w-full h-screen bg-white flex flex-col items-center justify-center gap-5">
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="avatar">
           <div className="w-44 h-auto rounded-3xl">
@@ -112,7 +112,7 @@ function UserProfile() {
         </div>
 
         <label htmlFor="profilePicture">
-          <h3 className="text-black text-center">Upload Profile Picture:</h3>
+          <h3 className="text-black text-center mb-2">Upload Profile Picture:</h3>
           <input
             type="file"
             id="profilePicture"
@@ -122,14 +122,14 @@ function UserProfile() {
         </label>
         <button
           onClick={handleUpload}
-          className="btn bg-customGreen text-white mt-2"
+          className="btn bg-customGreen text-white mt-2 min-w-80"
         >
           Update Profile Picture
         </button>
         {photoURL !== placeholderURL && (
           <button
             onClick={handleRemovePhoto}
-            className="btn bg-customGreen text-white mt-2"
+            className="btn bg-customGreen text-white mt-2 min-w-80"
           >
             Remove Profile Picture
           </button>
@@ -164,7 +164,7 @@ function UserProfile() {
           Sign Out
         </button>
 
-        { user?.email == import.meta.env.VITE_FIREBASE_ADMIN_EMAIL && (<NavLink to="/admin">
+        { user?.email == "iprateek01@gmail.com" && (<NavLink to="/admin">
           <button className="bg-stone-700 text-white rounded-xl p-3">
             Admin Panel
           </button>

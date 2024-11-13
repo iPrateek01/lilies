@@ -12,11 +12,14 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { Button } from "@headlessui/react";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../../../firebase/firebase";
 
-function Addresses() {
+function NewAddresses() {
   const [addressInput, setAddressInput] = useState(false);
-  const [streetAddressLine1, setstreetAddressLine1] = useState('')
-  const [streetAddressLine2, setstreetAddressLine2] = useState('')
+  const [addressName, setAddressName] = useState('')
+  const [streetAddressLine1, setStreetAddressLine1] = useState('')
+  const [streetAddressLine2, setStreetAddressLine2] = useState('')
   const [city, setCity] = useState('')
   const [county, setCounty] = useState('')
   const [country, setCountry] = useState('')
@@ -33,7 +36,37 @@ function Addresses() {
   const saveNewAddress = async (e) => {
     e.preventDefault()
 
-    setAddressInput(false)
+    const newAddressInfo = {
+      uid: auth.currentUser.uid,
+      addressName : addressName,
+      streetAddress :`${streetAddressLine1}, ${streetAddressLine2}`,
+      city : city,
+      county : county,
+      country : country,
+      pinCode : pinCode,
+      addlInfo : addlInfo
+    }
+
+    try {
+      // Add the object to Firestore with a unique ID
+      await addDoc(collection(db, "customerAddresses"), newAddressInfo);
+      alert("Address added successfully!");
+
+      // Optionally reset form fields after successful submission
+      setAddressName('')
+      setStreetAddressLine1('')
+      setStreetAddressLine2('')
+      setCity('')
+      setCounty('')
+      setCountry('')
+      setPinCode('')
+      setAddlInfo('')
+      setAddressInput(false)
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Failed to add food item.");
+    }
+    
   }
 
   return (
@@ -56,14 +89,30 @@ function Addresses() {
                 </Legend>
                 <Field>
                   <Label className="text-sm/6 font-medium text-black">
+                    Name
+                  </Label>
+                  <Input
+                    value={addressName}
+                    onChange={(e) => {
+                      setAddressName(e.target.value)
+                    }}
+                    placeholder="What would you like to name this specific address?"
+                    className={clsx(
+                      "mt-3 block w-full rounded-lg border-none bg-black/5 py-1.5 px-3 text-sm/6 text-black",
+                      "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-black/25"
+                    )}
+                  />
+                </Field>
+                <Field>
+                  <Label className="text-sm/6 font-medium text-black">
                     Street address line 1
                   </Label>
                   <Input
-                    value={streetAddressLine1}
-                    onChange={(e) => {
-                      setstreetAddressLine1(e.target.value)
-                    }}
-                    placeholder="Enter your street, apartment, landmarks, etc"
+                  value={streetAddressLine1}
+                  onChange={(e) => {
+                    setStreetAddressLine1(e.target.value)
+                  }}
+                  placeholder="Enter your street, apartment, landmarks, etc"
                     className={clsx(
                       "mt-3 block w-full rounded-lg border-none bg-black/5 py-1.5 px-3 text-sm/6 text-black",
                       "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-black/25"
@@ -77,7 +126,7 @@ function Addresses() {
                   <Input
                   value={streetAddressLine2}
                   onChange={(e) => {
-                    setstreetAddressLine2(e.target.value)
+                    setStreetAddressLine2(e.target.value)
                   }}
                   placeholder="Enter your street, apartment, landmarks, etc"
                     className={clsx(
@@ -161,6 +210,7 @@ function Addresses() {
                     Pin code/Postal code
                   </Label>
                   <Input
+                  // type="number"
                   value={pinCode}
                   onChange={(e) => {
                     setPinCode(e.target.value)
@@ -207,4 +257,4 @@ function Addresses() {
   );
 }
 
-export default Addresses;
+export default NewAddresses;

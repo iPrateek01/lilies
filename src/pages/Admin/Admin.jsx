@@ -7,7 +7,7 @@ import AddFoodItems from "../../components/Admin/AddFoodItems";
 
 function Admin() {
   const navigate = useNavigate();
-  const creatorEmail = import.meta.env.VITE_FIREBASE_ADMIN_EMAIL; // Replace with your Firebase creator email
+  const creatorEmail = "iprateek01@gmail.com"; // Replace with your Firebase creator email
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

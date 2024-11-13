@@ -12,11 +12,11 @@ import SignupPage from "./pages/Authentication/SignupPage.jsx";
 import AnimateRoutes from "./components/AnimateRoutes.jsx";
 import LoadingScreen from "./pages/LandingPage/LoadingScreen.jsx";
 import UserProfile from "./components/Dashboard/UserProfile.jsx";
-import Addresses from "./components/Dashboard/Addresses.jsx";
-import Orders from "./components/Dashboard/Orders.jsx";
-import Cart from "./components/Dashboard/Cart.jsx";
-import FoodMenu from "./components/Dashboard/FoodMenu.jsx";
-import ProtectedRoute from "./components/ProtectedRoutes.jsx";
+import Addresses from "./components/Dashboard/Address/Addresses.jsx";
+import Orders from "./components/Dashboard/Orders/Orders.jsx";
+import Cart from "./components/Dashboard/Cart/Cart.jsx";
+import FoodMenu from "./components/Dashboard/Menu/FoodMenu.jsx";
+import ProtectedRoute from "./components/Authentication/ProtectedRoutes.jsx";
 import Admin from "./pages/Admin/Admin.jsx";
 
 function App() {

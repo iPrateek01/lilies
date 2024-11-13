@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../../firebase/firebase";
+import { auth, db } from "../../../firebase/firebase";
 import { Suspense, lazy } from "react";
 
 const FoodItemCard = lazy(() => import("./FoodItemCard"));
 
 function FoodMenu() {
   const [foodItems, setFoodItems] = useState([]);
+  const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
     const fetchFoodItems = async () => {
@@ -28,41 +29,49 @@ function FoodMenu() {
   }, []);
 
   // const renderFoodItemCard = useCallback(, []);
-  
 
   return (
     <>
       <div className="w-full h-screen bg-white flex flex-col place-items-center p-4 overflow-auto">
         <div>
           <motion.h1
-            className="text-3xl font-bold text-center mt-10 text-black"
+            className="text-3xl font-bold text-center text-black"
             initial={{ opacity: 0, filter: "blur(10px)" }} // Initial state (fully visible, no blur)
             animate={{ opacity: 1, filter: "blur(0px)" }} // Animation state (fade out and blur)
             transition={{ duration: 1 }} // Duration of animation
           >
-            Welcome to My Page!
+            Welcome {auth?.currentUser?.displayName}!
           </motion.h1>
         </div>
-        <div className="flex flex-row justify-center flex-wrap gap-5 sm:gap-10 lg:mx-10 my-14">
-        {foodItems.map((item) => (
-    <Suspense
-      fallback={
-        <div className="flex w-52 flex-col gap-4">
-          <div className="skeleton h-32 w-full"></div>
-          <div className="skeleton h-4 w-28"></div>
-          <div className="skeleton h-4 w-full"></div>
-          <div className="skeleton h-4 w-full"></div>
-        </div>
-      }
-      key={item.id}
-    >
-      <FoodItemCard key={item.id} item={item} />
-    </Suspense>
-  ))}
+        <div className="flex flex-row justify-center flex-wrap gap-5 sm:gap-10 lg:mx-10 my-5">
+          {foodItems.filter((item) => 
+    // Render all items if searchItem is empty, or check if item name contains the searchItem string
+    searchItem === "" || item.name.toLowerCase().includes(searchItem.toLowerCase())
+  ).map((item) => (
+            <Suspense
+              fallback={
+                <div className="flex w-52 flex-col gap-4">
+                  <div className="skeleton h-32 w-full"></div>
+                  <div className="skeleton h-4 w-28"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                </div>
+              }
+              key={item.id}
+            >
+              <FoodItemCard key={item.id} item={item} />
+            </Suspense>
+          ))}
         </div>
         <div className="fixed z-10 bottom-0 p-2 flex justify-center">
           <label className="input input-bordered flex items-center gap-2 min-w-96 rounded-full bg-gradient-to-r from-emerald-400 to-rose-400 text-black shadow-lg">
-            <input type="text" className="grow min-w-0 placeholder-black" placeholder="Search" />
+            <input
+              type="text"
+              value={searchItem}
+              onChange={(e) => setSearchItem(e.target.value)}
+              className="grow min-w-0 placeholder-black"
+              placeholder="Search"
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"

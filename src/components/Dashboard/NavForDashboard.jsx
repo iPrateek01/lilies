@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
-function Drawer() {
+function NavForDashboard() {
   const location = useLocation();
 
   const currentPage = () => {
@@ -75,10 +75,20 @@ function Drawer() {
 
         <div className="hidden w-full h-screen lg:flex items-center m-7 text-white">
           <ul className="menu bg-customGreen rounded-box w-56 gap-5">
-            <li className="menu-title flex flex-row justify-center gap-3 text-customYellow text-3xl">
+            <li className="flex flex-row flex-nowrap">
+            <span className="menu-title flex flex-row justify-center gap-3 text-customYellow text-3xl">
               <img src="/assets/lilies.svg" alt="" className=" w-2/12 h-auto" />
               Lilies
+            </span>
+            <span>
+            <div className="avatar">
+              <div className="ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2">
+                <img src={auth.currentUser?.photoURL} />
+              </div>
+            </div>
+            </span>
             </li>
+            
             <li>
               <NavLink
                 to=""
@@ -157,4 +167,4 @@ function Drawer() {
   );
 }
 
-export default Drawer;
+export default NavForDashboard;
