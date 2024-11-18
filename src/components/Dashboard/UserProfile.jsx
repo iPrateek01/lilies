@@ -1,12 +1,20 @@
 import { signOut, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { auth, storage } from "../../firebase/firebase"; // Firebase initialization file
+import { auth, storage, db } from "../../firebase/firebase"; // Firebase initialization file
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AnimateRoutes from "../AnimateRoutes";
+import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
+import { setDoc, doc } from "firebase/firestore";
+
 
 function UserProfile() {
   const navigate = useNavigate();
+
+  const cartItems = useSelector((state) => state.cart.items)
+  const cartPrice = useSelector((state) => state.cart.totalPrice)
+  const cartQuantity = useSelector((state) => state.cart.totalQuantity)
 
   const [user, setUser] = useState(null); // Track the authenticated user
   const [photoURL, setPhotoURL] = useState(null); // Track the photo URL state
@@ -22,11 +30,9 @@ function UserProfile() {
       }
     });
 
-    
-
     // Fetch the placeholder image from Firebase Storage
     const fetchPlaceholderImage = async () => {
-      const placeholderRef = ref(storage, 'profilePictures/placeholder.webp');
+      const placeholderRef = ref(storage, "profilePictures/placeholder.webp");
       try {
         const url = await getDownloadURL(placeholderRef);
         setPlaceholderURL(url);
@@ -40,9 +46,18 @@ function UserProfile() {
     return () => unsubscribe();
   }, [placeholderURL]); // Runs when placeholderURL is available or changed
 
+  const cart = {
+    uid: auth?.currentUser?.uid,
+    cartItems,
+    cartPrice,
+    cartQuantity,
+  }
+
   // Sign out the user
   const handleSignOut = async () => {
     try {
+      const cartRef = doc(db, "userCart", user.uid) 
+      await setDoc(cartRef, cart, {merge: true})
       await signOut(auth);
       navigate("/"); // Redirect to homepage after sign-out
     } catch (error) {
@@ -86,20 +101,28 @@ function UserProfile() {
       // Update Firebase Authentication photoURL to the placeholder image URL
       await updateProfile(user, { photoURL: placeholderURL });
       setPhotoURL(placeholderURL); // Reset the local photo URL state to the placeholder
-      console.log("Profile picture removed successfully and set to placeholder!");
+      console.log(
+        "Profile picture removed successfully and set to placeholder!"
+      );
     } catch (error) {
       console.error("Error removing profile picture:", error);
     }
   };
 
   if (!user || !placeholderURL) {
-    return <div><AnimateRoutes /></div>; // Show loading state until user and placeholder URL are available
+    return (
+      <div>
+        <AnimateRoutes />
+      </div>
+    ); // Show loading state until user and placeholder URL are available
   }
-
-  
 
   return (
     <div className="w-full h-screen bg-white flex flex-col items-center justify-center gap-5">
+      <Helmet>
+        <title>Lilies - Profile</title>
+      </Helmet>
+
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="avatar">
           <div className="w-44 h-auto rounded-3xl">
@@ -112,7 +135,9 @@ function UserProfile() {
         </div>
 
         <label htmlFor="profilePicture">
-          <h3 className="text-black text-center mb-2">Upload Profile Picture:</h3>
+          <h3 className="text-black text-center mb-2">
+            Upload Profile Picture:
+          </h3>
           <input
             type="file"
             id="profilePicture"
@@ -164,11 +189,13 @@ function UserProfile() {
           Sign Out
         </button>
 
-        { user?.email == "iprateek01@gmail.com" && (<NavLink to="/admin">
-          <button className="bg-stone-700 text-white rounded-xl p-3">
-            Admin Panel
-          </button>
-        </NavLink>)}
+        {user?.email == "iprateek01@gmail.com" && (
+          <NavLink to="/admin">
+            <button className="bg-stone-700 text-white rounded-xl p-3">
+              Admin Panel
+            </button>
+          </NavLink>
+        )}
       </div>
     </div>
   );

@@ -71,7 +71,7 @@ function NewAddresses() {
 
   return (
     <>
-      <div className="w-full h-screen overflow-auto">
+      <div className="w-full h-screen">
         <div className="flex flex-row items-center justify-center w-full">
           <button
             onClick={handleAddAnAddress}

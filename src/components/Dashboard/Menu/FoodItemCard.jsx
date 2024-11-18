@@ -1,10 +1,31 @@
-// import {memo} from 'react'
+
 import { CiShoppingCart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux"
+import { addItemToCart } from "../../../features/cart/cartSlice";
+import { useNavigate } from "react-router-dom"
 
 
-const FoodItemCard = ({ item}) => {
+const FoodItemCard = ({ item }) => {
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const cartItems = useSelector((state) => state.cart.items)
+
+  const cartItem = cartItems.find((cartItem) => cartItem.id === item.id)
+  const isInCart = cartItem?.quantity > 0
+
+  const handleClick = () => {
+    if (isInCart) {
+      navigate("cart")
+    }
+    else {
+      dispatch(addItemToCart(item))
+    }
+  }
+  
   
   return (
     <>
@@ -26,8 +47,8 @@ const FoodItemCard = ({ item}) => {
           </div>
         </div>
         <div className="flex justify-center bottom-0">
-          <button onClick={null} className="btn bg-gray-800 text-yellow-500 shadow-md min-w-full">
-            Add to Cart
+          <button onClick={handleClick} className="btn bg-gray-800 text-yellow-500 shadow-md min-w-full">
+            {isInCart ? "Go to Cart" : "Add to Cart"} 
             <CiShoppingCart />
           </button>
         </div>
@@ -38,6 +59,7 @@ const FoodItemCard = ({ item}) => {
 
 FoodItemCard.propTypes = {
   item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -48,7 +70,7 @@ FoodItemCard.propTypes = {
     servingSize: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
-  // toggleDrawer: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
 };
 
 export default FoodItemCard;
